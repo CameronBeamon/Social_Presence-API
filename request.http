@@ -1,0 +1,15 @@
+### get all tweets
+GET https://api.twitter.com/2/users/1692561577/tweets?max_results=5
+Authorization: Bearer AAAAAAAAAAAAAAAAAAAAAPIlYAEAAAAAcl9F%2B2lHdhwOHIV000PTpleFgM4%3DDDgwD0NlzM7mJoZn4M7zewzagbrSe37AW3cBCBCKyW66CcvWaF
+
+### Post a tweet
+POST https://api.twitter.com/2/tweets
+Authorization: Bearer AAAAAAAAAAAAAAAAAAAAAPIlYAEAAAAAC1IA6rids9Aa0KueD6J97O5Ko9I%3D1G9tewnYJ8zhmgW8MtU4ZPuSJtkGNRWB0IKxHShsAQtbKahuwJ
+Content-Type: application/json
+
+{
+  "tweet": "test",
+}
+
+### Authorize
+POST 
