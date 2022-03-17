@@ -11,5 +11,30 @@ Content-Type: application/json
   "tweet": "test",
 }
 
-### Authorize
-POST 
+ ### facebook generate access token 
+ GET https://graph.facebook.com/oauth/access_token?client_id=590641228675322&client_secret=49e346b80551b1cc6618bc1aeb2f7166&grant_type=client_credentials
+
+### Sessions create (login)
+ POST http://localhost:3000/sessions
+ Content-Type: application/json
+
+ {
+   "email": "test@test.com",
+   "password": "password"
+ }
+
+ 
+
+### Users create (signup)
+ POST http://localhost:3000/users
+ Content-Type: application/json
+
+ {
+   "name": "Test name",
+   "email": "test@test.com",
+   "password": "password",
+   "password_confirmation": "password"
+ }
+
+ ### facebook generate access token 
+ GET https://graph.facebook.com/oauth/access_token?client_id=590641228675322&client_secret=49e346b80551b1cc6618bc1aeb2f7166&grant_type=client_credentials
