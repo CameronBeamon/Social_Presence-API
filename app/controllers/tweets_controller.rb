@@ -9,10 +9,7 @@ class TweetsController < ApplicationController
       response = HTTP
         .auth("Bearer #{Rails.application.credentials.twitter_bearer}")
         .get("https://api.twitter.com/2/users/#{user_id}/tweets?max_results=10")
-      # .auth("Bearer #{params["access_token"]}")
-      # .get("https://api.twitter.com/2/tweets?ids=#{user_info["data"]["id"]}&tweet.fields=created_at&expansions=author_id&user.fields=created_at")
-      data = response
-      render json: JSON.parse(data)
+      render json: JSON.parse(response)
     else
       render json: [message: "Failed"]
     end
@@ -26,7 +23,6 @@ class TweetsController < ApplicationController
   end
 
   def authorize
-    pp Rails.application.credentials
     response = HTTP
     # .auth("Basic VFRkcFNrYzJWV3BVUTJST2IwVlJiRWxTV1ZvNk1UcGphUTpPZXpmYUY5alZHX1VKbTNsbXY1TjBvNWxOM3ZBRnZ5SFhoNlRiVkVGVWJWTHlFSmFsVA==")
       .headers(:ContentType => "application/x-www-form-urlencoded", :Authorization => "Basic #{Rails.application.credentials.twitter_basic_auth}")
@@ -34,14 +30,30 @@ class TweetsController < ApplicationController
             :form => { :code => params["code"],
                        :grant_type => "authorization_code",
                        :client_id => "#{Rails.application.credentials.twitter_client_id}",
-                       :redirect_uri => "http://localhost:8080",
+                       :redirect_uri => "http://localhost:8080/auth_twitter",
                        :code_verifier => "challenge" })
     render json: JSON.parse(response.body)
   end
 
-  def update
+  def create
+    if params["access_token"] && params["text"]
+      response = HTTP
+        .headers(:ContentType => "application/json")
+        .auth("Bearer #{params["access_token"]}")
+        .post("https://api.twitter.com/2/tweets",
+              :json => {
+                text: params["text"],
+              })
+      render json: JSON.parse(response)
+    else
+      render json: { message: "no access token or text" }
+    end
   end
 
-  def delete
+  def destroy
+    response = HTTP
+      .auth("Bearer #{params["access_token"]}")
+      .delete("https://api.twitter.com/2/tweets/#{params["id"]}")
+    render json: JSON.parse(response)
   end
 end
