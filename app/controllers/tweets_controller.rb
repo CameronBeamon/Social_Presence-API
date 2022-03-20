@@ -24,7 +24,6 @@ class TweetsController < ApplicationController
 
   def authorize
     response = HTTP
-    # .auth("Basic VFRkcFNrYzJWV3BVUTJST2IwVlJiRWxTV1ZvNk1UcGphUTpPZXpmYUY5alZHX1VKbTNsbXY1TjBvNWxOM3ZBRnZ5SFhoNlRiVkVGVWJWTHlFSmFsVA==")
       .headers(:ContentType => "application/x-www-form-urlencoded", :Authorization => "Basic #{Rails.application.credentials.twitter_basic_auth}")
       .post("https://api.twitter.com/2/oauth2/token",
             :form => { :code => params["code"],

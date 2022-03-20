@@ -9,8 +9,9 @@ Rails.application.routes.draw do
   post "/all_tweets" => "tweets#create"
   delete "/all_tweets/:id" => "tweets#destroy"
 
-  get "/all_reddit" => "reddit#index"
   post "/authorize_reddit" => "reddit#auth"
+  get "/all_reddit" => "reddit#index"
+
   # Defines the root path route ("/")
   # root "articles#index"
 end
