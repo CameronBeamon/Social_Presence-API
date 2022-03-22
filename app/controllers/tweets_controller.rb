@@ -1,4 +1,6 @@
 class TweetsController < ApplicationController
+  before_action :authenticate_user
+
   def index
     if params["access_token"]
       first_response = HTTP

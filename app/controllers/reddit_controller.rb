@@ -1,4 +1,6 @@
 class RedditController < ApplicationController
+  before_action :authenticate_user
+
   def index
     first_response = HTTP
       .auth("Bearer #{params["access_token"]}")
