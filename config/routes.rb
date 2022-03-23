@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   post "/authorize_reddit" => "reddit#auth"
   get "/all_reddit" => "reddit#index"
+  post "/all_reddit" => "reddit#create"
 
   # Defines the root path route ("/")
   # root "articles#index"

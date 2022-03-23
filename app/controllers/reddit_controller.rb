@@ -10,6 +10,7 @@ class RedditController < ApplicationController
     user.delete_at(0)
     user.delete_at(0)
     user = user.join
+    @username = user
 
     response = HTTP.get("https://www.reddit.com/user/#{user}/.json")
     render json: JSON.parse(response)
@@ -21,5 +22,13 @@ class RedditController < ApplicationController
       .post("https://www.reddit.com/api/v1/access_token?", :params => { :grant_type => "authorization_code", :code => "#{params[:code]}", :redirect_uri => "http://localhost:8080/auth_reddit" })
     render json: JSON.parse(response)
     # render json: { message: params[:code] }
+  end
+
+  def create
+    response = HTTP
+      .auth("Bearer #{params["access_token"]}")
+      .post("https://oauth.reddit.com/api/submit?title=#{params["title"]}&text=#{params["text"]}&kind=self&sr=#{@username}")
+
+    render json: JSON.parse(response)
   end
 end
