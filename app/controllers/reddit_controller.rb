@@ -19,7 +19,7 @@ class RedditController < ApplicationController
   def auth
     response = HTTP
       .basic_auth(:user => "#{Rails.application.credentials.reddit_client_id}", :pass => "#{Rails.application.credentials.reddit_secret}")
-      .post("https://www.reddit.com/api/v1/access_token?", :params => { :grant_type => "authorization_code", :code => "#{params[:code]}", :redirect_uri => "http://localhost:8080/auth_reddit" })
+      .post("https://www.reddit.com/api/v1/access_token?", :params => { :grant_type => "authorization_code", :code => "#{params[:code]}", :redirect_uri => "https://cosmic-naiad-083ba7.netlify.app/auth_reddit" })
     render json: JSON.parse(response)
     # render json: { message: params[:code] }
   end

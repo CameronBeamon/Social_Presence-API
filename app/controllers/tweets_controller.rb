@@ -31,7 +31,7 @@ class TweetsController < ApplicationController
             :form => { :code => params["code"],
                        :grant_type => "authorization_code",
                        :client_id => "#{Rails.application.credentials.twitter_client_id}",
-                       :redirect_uri => "http://localhost:8080/auth_twitter",
+                       :redirect_uri => "https://cosmic-naiad-083ba7.netlify.app/auth_twitter",
                        :code_verifier => "challenge" })
     render json: JSON.parse(response.body)
   end
