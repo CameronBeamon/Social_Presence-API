@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "localhost:8080", "api.twitter.com"
+    origins "localhost:8080", "api.twitter.com", "cosmic-naiad-083ba7.netlify.app"
 
     resource "*",
       headers: :any,
